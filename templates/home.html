@@ -1,12 +1,111 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>AuthFlow</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Home | AuthFlow</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #e5e7eb;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #0f2747;
+            color: white;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            font-size: 22px;
+        }
+
+        .logout-btn {
+            background-color: #ffffff;
+            color: #0f2747;
+            padding: 9px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .logout-btn:hover {
+            background-color: #d1d5db;
+        }
+
+        .container {
+            min-height: calc(100vh - 70px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .home-card {
+            width: 450px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            text-align: center;
+        }
+
+        .home-card h1 {
+            color: #0f2747;
+            margin-bottom: 12px;
+        }
+
+        .home-card p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .username {
+            color: #0f2747;
+            font-weight: bold;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Welcome to AuthFlow 🚀</h1>
-    <p>My First Django Project</p>
-    <a href="{% url 'login' %}">Login</a> <br>
-    <a href="{% url 'signup' %}">Signup</a>
+
+    <nav class="navbar">
+        <h2>AuthFlow</h2>
+
+        <a href="{% url 'logout' %}" class="logout-btn">
+            Logout
+        </a>
+    </nav>
+
+    <div class="container">
+
+        <div class="home-card">
+
+            <h1>
+                Welcome,
+                <span class="username">
+                    {{ request.user.username }}
+                </span>
+            </h1>
+
+            <p>
+                You have successfully logged in to AuthFlow.
+            </p>
+
+        </div>
+
+    </div>
+
 </body>
 </html>

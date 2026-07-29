@@ -28,17 +28,35 @@
             align-items: center;
         }
 
-        .navbar h2 {
+        .brand {
             font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            padding: 9px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .profile-btn {
+            color: white;
+        }
+
+        .profile-btn:hover {
+            background-color: #193b68;
         }
 
         .logout-btn {
-            background-color: #ffffff;
+            background-color: white;
             color: #0f2747;
-            padding: 9px 18px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
         }
 
         .logout-btn:hover {
@@ -50,11 +68,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 30px;
         }
 
         .home-card {
             width: 450px;
-            background-color: #ffffff;
+            background-color: white;
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
@@ -81,11 +100,23 @@
 <body>
 
     <nav class="navbar">
-        <h2>AuthFlow</h2>
 
-        <a href="{% url 'logout' %}" class="logout-btn">
-            Logout
-        </a>
+        <div class="brand">
+            AuthFlow
+        </div>
+
+        <div class="nav-links">
+
+            <a href="{% url 'profile' %}" class="profile-btn">
+                Profile
+            </a>
+
+            <a href="{% url 'logout' %}" class="logout-btn">
+                Logout
+            </a>
+
+        </div>
+
     </nav>
 
     <div class="container">

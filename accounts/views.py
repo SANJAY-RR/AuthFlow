@@ -52,3 +52,44 @@ def signup_view(request):
             return redirect("login")
 
     return render(request, "signup.html")
+
+@login_required
+def profile_view(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+
+        if User.objects.filter(username=username).exclude(id=request.user.id).exists():
+            messages.error(request, "Username already exists")
+        elif User.objects.filter(email=email).exclude(id=request.user.id).exists():
+            messages.error(request, "Email already exists")
+        else:
+            user = request.user
+            user.username = username
+            user.email = email
+            user.save()
+            messages.success(request, "Profile updated successfully")
+        return redirect("profile")
+    return render(request, "profile.html")  
+
+@login_required
+def change_password_view(request):
+    if request.method == "POST":
+        current_password = request.POST.get("current_password")
+        new_password = request.POST.get("new_password")
+        confirm_new_password = request.POST.get("confirm_password")
+
+        if not request.user.check_password(current_password):
+            messages.error(request, "Current password is incorrect")
+
+        elif new_password != confirm_new_password:
+            messages.error(request, "New passwords do not match")
+
+        else:
+            request.user.set_password(new_password)
+            request.user.save()
+
+            messages.success(request, "Password changed successfully")
+            return redirect("login")
+
+    return render(request, "change_password.html")
